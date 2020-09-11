@@ -18,7 +18,8 @@ authRouter.post("/login", jsonBodyParser, (req, res, next) => {
     .then((dbUser) => {
       if (!dbUser)
         return res.status(400).json({
-          error: "Incorrect email or password",
+          // error: "Incorrect email or password. ",
+          error: "Incorrect email or password.",
         });
 
       return AuthService.comparePasswords(
@@ -27,7 +28,7 @@ authRouter.post("/login", jsonBodyParser, (req, res, next) => {
       ).then((compareMatch) => {
         if (!compareMatch)
           return res.status(400).json({
-            error: "Incorrect email or password",
+            error: "Incorrect email or password.",
           });
 
         const sub = dbUser.email;

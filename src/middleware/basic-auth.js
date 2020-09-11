@@ -16,7 +16,7 @@ function requireAuth(req, res, next) {
     return res.status(401).json({ error: "Unauthorized request" });
   }
 
-  AuthService.getUserWithUserName(req.app.get("db"), tokenEmail)
+  AuthService.getUserWithEmail(req.app.get("db"), tokenEmail)
     .then((user) => {
       if (!user) {
         return res.status(401).json({ error: "Unauthorized request" });
