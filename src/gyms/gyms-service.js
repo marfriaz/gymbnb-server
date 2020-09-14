@@ -2,34 +2,28 @@ const xss = require("xss");
 
 const GymsService = {
   getAllGyms(db) {
-    return (
-      db
-        .from("gymbnb_gyms AS gym")
-        .select(
-          "gym.id",
-          "gym.title",
-          "gym.user_id",
-          "gym.description",
-          "gym.price",
-          "gym.guests",
-          "gym.location",
-          "gym.date_created",
-          "gym.img_url_one",
-          "gym.img_url_two",
-          "gym.img_url_three",
-          "gym.img_url_four",
-          "gym.img_url_five",
-          // db.raw(
-          //   `json_strip_nulls(
-          //     json_build_object(
-          //       'id', img.id,
-          //       'img_urls', img.img_url,
-          //       'gym_id', img.gym_id
-          //    )
-          //   ) AS "images"`
-          // ),
-          db.raw(
-            `json_strip_nulls(
+    return db
+      .from("gymbnb_gyms AS gym")
+      .select(
+        "gym.id",
+        "gym.title",
+        "gym.user_id",
+        "gym.description",
+        "gym.price",
+        "gym.max_guest",
+        "gym.location",
+        "gym.date_created",
+        db.raw(
+          `json_strip_nulls(
+              json_build_object(
+                'id', img.id,
+                'img_urls', img.img_urls,
+                'gym_id', img.gym_id
+             )
+            ) AS "images"`
+        ),
+        db.raw(
+          `json_strip_nulls(
             json_build_object(
               'id', usr.id,
               'first_name', usr.first_name,
@@ -38,13 +32,12 @@ const GymsService = {
               'date_created', usr.date_created
            )
           ) AS "user"`
-          )
         )
-        // .leftJoin("gym_images AS img", "gym.id", "img.gym_id")
-        .leftJoin("gymbnb_users AS usr", "gym.user_id", "usr.id")
-        // .groupBy("gym.id", "usr.id", "img.id");
-        .groupBy("gym.id", "usr.id")
-    );
+      )
+      .leftJoin("gym_images AS img", "gym.id", "img.gym_id")
+      .leftJoin("gymbnb_users AS usr", "gym.user_id", "usr.id")
+      .groupBy("gym.id", "usr.id", "img.id");
+    // .groupBy("gym.id", "usr.id")
   },
 
   getById(db, id) {
@@ -55,50 +48,55 @@ const GymsService = {
     return GymsService.getAllGyms(db).where("gym.location", location);
   },
 
-  insertGym(db, newGym) {
+  // insertGym(db, newGym) {
+  //   return db
+  //     .insert(newGym)
+  //     .into("gymbnb_gyms")
+  //     .returning("*")
+  //     .then(([gym]) => gym)
+  //     .then((gym) => GymsService.getById(db, gym.id));
+  // },
+
+  insertGym(db, newGym, img_urls) {
     return db
       .insert(newGym)
       .into("gymbnb_gyms")
       .returning("*")
       .then(([gym]) => gym)
-      .then((gym) => GymsService.getById(db, gym.id));
+      .then((gym) => GymsService.insertImages(db, gym.id, img_urls));
   },
 
-  // insertGym(db, newGym, img_urls) {
-  //   return db
-  //     .insert(newGym)
-  //     .into("gymbnb_gyms")
-  //     .returning("*")
-  //     .then(([gym]) => {
-  //       return db
-  //         .insert(img_urls)
-  //         .into("gym_images")
-  //         .then(() => gym);
-  //     })
-  //     .then((gym) => GymsService.getById(db, gym.id));
-  // },
+  insertImages(db, gym_id, img_urls) {
+    return (
+      db
+        .raw(
+          `INSERT INTO gym_images(gym_id, img_urls) VALUES(${gym_id}, '${img_urls}')`
+        )
+        // what you pass to the .then is a callback function,
+        // .raw doesnt return anything specifically,
+        .then(() => GymsService.getById(db, gym_id))
+    );
+  },
+
+  getById(db, id) {
+    return GymsService.getAllGyms(db).where("gym.id", id).first();
+  },
 
   serializeGym(gym) {
-    // const { user, images } = gym;
-    const { user } = gym;
+    const { user, images } = gym;
     return {
       id: gym.id,
       title: xss(gym.title),
       description: xss(gym.description),
       price: Number(gym.price),
-      guests: Number(gym.guests),
+      max_guest: Number(gym.max_guest),
       location: GymsService.serializeGymLocation(gym.location),
       date_created: new Date(gym.date_created),
-      img_url_one: gym.img_url_one,
-      img_url_two: gym.img_url_two,
-      img_url_three: gym.img_url_three,
-      img_url_four: gym.img_url_four,
-      img_url_five: gym.img_url_five,
-      // images: {
-      //   id: images.id,
-      //   gym_id: images.gym_id,
-      //   img_urls: images.img_urls,
-      // },
+      images: {
+        id: images.id,
+        gym_id: images.gym_id,
+        img_urls: images.img_urls,
+      },
       user: {
         id: user.id,
         first_name: user.first_name,

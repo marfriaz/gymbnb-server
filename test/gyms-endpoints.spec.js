@@ -5,7 +5,7 @@ const helpers = require("./test-helpers");
 describe("Gyms Endpoints", function () {
   let db;
 
-  const { testUsers, testGyms } = helpers.makeGymsFixtures();
+  const { testUsers, testGyms, testImages } = helpers.makeGymsFixtures();
 
   before("make knex instance", () => {
     db = knex({
@@ -30,12 +30,12 @@ describe("Gyms Endpoints", function () {
 
     context("Given there are gyms in the database", () => {
       beforeEach("insert gyms", () =>
-        helpers.seedGymsTables(db, testUsers, testGyms)
+        helpers.seedGymsTables(db, testUsers, testGyms, testImages)
       );
 
       it("responds with 200 and all of the gyms", () => {
         const expectedGyms = testGyms.map((gym) =>
-          helpers.makeExpectedGym(testUsers, gym)
+          helpers.makeExpectedGym(testUsers, gym, testImages)
         );
         return supertest(app).get("/api/gyms").expect(200, expectedGyms);
       });
@@ -43,10 +43,14 @@ describe("Gyms Endpoints", function () {
 
     context(`Given an XSS attack gym`, () => {
       const testUser = helpers.makeUsersArray()[1];
-      const { maliciousGym, expectedGym } = helpers.makeMaliciousGym(testUser);
+      const testImage = helpers.makeImagesArray()[1];
+      const { maliciousGym, expectedGym } = helpers.makeMaliciousGym(
+        testUser,
+        testImage
+      );
 
       beforeEach("insert malicious gym", () => {
-        return helpers.seedMaliciousGym(db, testUser, maliciousGym);
+        return helpers.seedMaliciousGym(db, testUser, maliciousGym, testImage);
       });
 
       it("removes XSS attack content", () => {
@@ -76,14 +80,15 @@ describe("Gyms Endpoints", function () {
 
     context("Given there are gyms in the database", () => {
       beforeEach("insert gyms", () =>
-        helpers.seedGymsTables(db, testUsers, testGyms)
+        helpers.seedGymsTables(db, testUsers, testGyms, testImages)
       );
 
       it("responds with 200 and the specified gym", () => {
         const gymId = 2;
         const expectedGym = helpers.makeExpectedGym(
           testUsers,
-          testGyms[gymId - 1]
+          testGyms[gymId - 1],
+          testImages
         );
 
         return supertest(app)
@@ -95,10 +100,11 @@ describe("Gyms Endpoints", function () {
 
     context(`Given an XSS attack gym`, () => {
       const testUser = helpers.makeUsersArray()[1];
+      const testImage = helpers.makeImagesArray()[4];
       const { maliciousGym, expectedGym } = helpers.makeMaliciousGym(testUser);
 
       beforeEach("insert malicious gym", () => {
-        return helpers.seedMaliciousGym(db, testUser, maliciousGym);
+        return helpers.seedMaliciousGym(db, testUser, maliciousGym, testImage);
       });
 
       it("removes XSS attack content", () => {

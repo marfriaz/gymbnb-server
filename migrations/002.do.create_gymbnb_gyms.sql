@@ -3,15 +3,10 @@ CREATE TABLE gymbnb_gyms (
     title TEXT NOT NULL,
     description TEXT NOT NULL,
     price INTEGER NOT NULL,
-    guests INTEGER NOT NULL,
+    max_guest INTEGER NOT NULL,
     user_id INTEGER 
         REFERENCES gymbnb_users(id) ON DELETE CASCADE NOT NULL,
-    date_created TIMESTAMP DEFAULT now() NOT NULL,
-    img_url_one TEXT NOT NULL,
-    img_url_two TEXT,
-    img_url_three TEXT,
-    img_url_four TEXT,
-    img_url_five TEXT
+    date_created TIMESTAMP DEFAULT now() NOT NULL
 );
 
 

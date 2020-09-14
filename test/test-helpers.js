@@ -30,6 +30,19 @@ function makeUsersArray() {
   ];
 }
 
+function makeMaliciousGymInstance(user) {
+  return {
+    id: 911,
+    user_id: user.id,
+    title: 'Naughty naughty very naughty <script>alert("xss");</script>',
+    description: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`,
+    price: 15,
+    max_guest: 2,
+    location: "los-angeles",
+    date_created: new Date(),
+  };
+}
+
 function makeGymsArray(users) {
   return [
     {
@@ -39,19 +52,9 @@ function makeGymsArray(users) {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non. Adipisci, pariatur. Molestiae, libero esse hic adipisci autem neque?",
       price: 15,
-      guests: 5,
+      max_guest: 5,
       location: "san-francisco",
       date_created: new Date("2029-01-22T16:28:32.615Z"),
-      img_url_one:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_6.jpg",
-      img_url_two:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_4.jpg",
-      img_url_three:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafb8adea35.jpeg",
-      img_url_four:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafa0e52c5a.jpeg",
-      img_url_five:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_3.jpg",
     },
     {
       id: 2,
@@ -60,19 +63,9 @@ function makeGymsArray(users) {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non. Adipisci, pariatur. Molestiae, libero esse hic adipisci autem neque?",
       price: 15,
-      guests: 3,
+      max_guest: 3,
       location: "san-diego",
       date_created: new Date("2020-09-10T07:53:34.035Z"),
-      img_url_one:
-        "https://i.pinimg.com/236x/f0/3e/10/f03e10aee84a171dc6ece6c1e29619d7.jpg",
-      img_url_two:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_4.jpg",
-      img_url_three:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafb8adea35.jpeg",
-      img_url_four:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafa0e52c5a.jpeg",
-      img_url_five:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_3.jpg",
     },
     {
       id: 3,
@@ -81,19 +74,9 @@ function makeGymsArray(users) {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non. Adipisci, pariatur. Molestiae, libero esse hic adipisci autem neque?",
       price: 15,
-      guests: 5,
+      max_guest: 5,
       location: "sunnyvale",
       date_created: new Date("2020-09-10T07:53:34.035Z"),
-      img_url_one:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_6.jpg",
-      img_url_two:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_4.jpg",
-      img_url_three:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafb8adea35.jpeg",
-      img_url_four:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafa0e52c5a.jpeg",
-      img_url_five:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_3.jpg",
     },
     {
       id: 4,
@@ -102,41 +85,89 @@ function makeGymsArray(users) {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non. Adipisci, pariatur. Molestiae, libero esse hic adipisci autem neque?",
       price: 15,
-      guests: 2,
+      max_guest: 2,
       location: "san-francisco",
       date_created: new Date("2020-09-10T07:53:34.035Z"),
-      img_url_one:
-        "https://i.pinimg.com/originals/6f/c3/e8/6fc3e8a189fa706150a9fc3780ac29ea.jpg",
-      img_url_two:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_4.jpg",
-      img_url_three:
-        "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafb8adea35.jpeg",
-      img_url_four: null,
-      img_url_five: null,
+    },
+
+    {
+      id: 911,
+      user_id: users[0].id,
+      title: 'Naughty naughty very naughty <script>alert("xss");</script>',
+      description: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`,
+      price: 15,
+      max_guest: 2,
+      location: "los-angeles",
+      date_created: new Date("2020-09-10T07:53:34.035Z"),
     },
   ];
 }
 
-function makeExpectedGym(users, gym) {
-  //double checck
+function makeImagesArray() {
+  return [
+    {
+      id: 1,
+      gym_id: 1,
+      img_urls: [
+        "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
+        "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
+      ],
+    },
+    {
+      id: 2,
+      gym_id: 2,
+      img_urls: [
+        "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
+        "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
+      ],
+    },
+    {
+      id: 3,
+      gym_id: 3,
+      img_urls: [
+        "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
+        "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
+      ],
+    },
+    {
+      id: 4,
+      gym_id: 4,
+      img_urls: [
+        "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
+        "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
+      ],
+    },
+    {
+      id: 5,
+      gym_id: 911,
+      img_urls: [
+        "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
+        "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
+      ],
+    },
+  ];
+}
+
+function makeExpectedGym(users, gym, images) {
   const user = users.find((user) => user.id === gym.user_id);
+  const img = images.find((img) => img.gym_id === gym.id);
 
   return {
     id: gym.id,
     title: gym.title,
     description: gym.description,
     price: Number(gym.price),
-    guests: Number(gym.guests),
+    max_guest: Number(gym.max_guest),
     location: gym.location
       .split("-")
       .map((s) => s.substr(0, 1).toUpperCase() + s.substr(1))
       .join(" "),
     date_created: gym.date_created.toISOString(),
-    img_url_one: gym.img_url_one,
-    img_url_two: gym.img_url_two,
-    img_url_three: gym.img_url_three,
-    img_url_four: gym.img_url_four,
-    img_url_five: gym.img_url_five,
+    images: {
+      id: img.id,
+      gym_id: img.gym_id,
+      img_urls: img.img_urls,
+    },
     user: {
       id: user.id,
       first_name: user.first_name,
@@ -148,28 +179,26 @@ function makeExpectedGym(users, gym) {
 }
 
 function makeMaliciousGym(user) {
-  const maliciousGym = {
-    id: 911,
-    user_id: user.id,
-    title: 'Naughty naughty very naughty <script>alert("xss");</script>',
-    description: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`,
-    price: 15,
-    guests: 2,
-    location: "los-angeles",
-    date_created: new Date(),
-    img_url_one:
-      "https://i.pinimg.com/originals/26/b1/fb/26b1fbfb2bff406f71bd213b314872a5.jpg",
-    img_url_two:
-      "https://i.pinimg.com/236x/5e/49/3d/5e493d1f8381303bcc8d1c870d1da1d7.jpg",
-    img_url_three:
-      "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafb8adea35.jpeg",
-    img_url_four:
-      "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafa0e52c5a.jpeg",
-    img_url_five:
-      "https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_3.jpg",
-  };
+  console.log([user][0]);
+  const maliciousGym = makeMaliciousGymInstance(user);
+
+  // const user = makeUsersArray()[2];
+
+  // const maliciousGym = {
+  //   id: 911,
+  //   user_id: user.id,
+  //   title: 'Naughty naughty very naughty <script>alert("xss");</script>',
+  //   description: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`,
+  //   price: 15,
+  //   max_guest: 2,
+  //   location: "los-angeles",
+  //   date_created: new Date(),
+  // };
+
+  const image = makeImagesArray()[4];
+
   const expectedGym = {
-    ...makeExpectedGym([user], maliciousGym),
+    ...makeExpectedGym([user], maliciousGym, [image]),
     title:
       'Naughty naughty very naughty &lt;script&gt;alert("xss");&lt;/script&gt;',
     description: `Bad image <img src="https://url.to.file.which/does-not.exist">. But not <strong>all</strong> bad.`,
@@ -183,7 +212,9 @@ function makeMaliciousGym(user) {
 function makeGymsFixtures() {
   const testUsers = makeUsersArray();
   const testGyms = makeGymsArray(testUsers);
-  return { testUsers, testGyms };
+  const testImages = makeImagesArray();
+
+  return { testUsers, testGyms, testImages };
 }
 
 function cleanTables(db) {
@@ -192,7 +223,8 @@ function cleanTables(db) {
       .raw(
         `TRUNCATE
         gymbnb_gyms,
-        gymbnb_users
+        gymbnb_users, 
+        gym_images
       `
       )
       .then(() =>
@@ -222,11 +254,12 @@ function seedUsers(db, users) {
     );
 }
 
-function seedGymsTables(db, users, gyms) {
+function seedGymsTables(db, users, gyms, images) {
   // use a transaction to group the queries and auto rollback on any failure
   return db.transaction(async (trx) => {
     await seedUsers(trx, users);
     await trx.into("gymbnb_gyms").insert(gyms);
+    await trx.into("gym_images").insert(images);
     // update the auto sequence to match the forced id values
     await trx.raw(`SELECT setval('gymbnb_gyms_id_seq', ?)`, [
       gyms[gyms.length - 1].id,
@@ -234,8 +267,10 @@ function seedGymsTables(db, users, gyms) {
   });
 }
 
-function seedMaliciousGym(db, user, gym) {
-  return seedUsers(db, [user]).then(() => db.into("gymbnb_gyms").insert([gym]));
+function seedMaliciousGym(db, user, gym, img) {
+  return seedUsers(db, [user])
+    .then(() => db.into("gymbnb_gyms").insert([gym]))
+    .then(() => db.into("gym_images").insert([img]));
 }
 
 function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
@@ -249,6 +284,7 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
 module.exports = {
   makeUsersArray,
   makeGymsArray,
+  makeImagesArray,
   makeExpectedGym,
   makeMaliciousGym,
 
