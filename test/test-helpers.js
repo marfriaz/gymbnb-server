@@ -30,19 +30,6 @@ function makeUsersArray() {
   ];
 }
 
-function makeMaliciousGymInstance(user) {
-  return {
-    id: 911,
-    user_id: user.id,
-    title: 'Naughty naughty very naughty <script>alert("xss");</script>',
-    description: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`,
-    price: 15,
-    max_guest: 2,
-    location: "los-angeles",
-    date_created: new Date(),
-  };
-}
-
 function makeGymsArray(users) {
   return [
     {
@@ -103,11 +90,11 @@ function makeGymsArray(users) {
   ];
 }
 
-function makeImagesArray() {
+function makeImagesArray(gyms) {
   return [
     {
       id: 1,
-      gym_id: 1,
+      gym_id: gyms[0].id,
       img_urls: [
         "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
         "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
@@ -115,7 +102,7 @@ function makeImagesArray() {
     },
     {
       id: 2,
-      gym_id: 2,
+      gym_id: gyms[1].id,
       img_urls: [
         "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
         "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
@@ -123,7 +110,7 @@ function makeImagesArray() {
     },
     {
       id: 3,
-      gym_id: 3,
+      gym_id: gyms[2].id,
       img_urls: [
         "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
         "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
@@ -131,7 +118,7 @@ function makeImagesArray() {
     },
     {
       id: 4,
-      gym_id: 4,
+      gym_id: gyms[3].id,
       img_urls: [
         "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
         "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
@@ -139,7 +126,7 @@ function makeImagesArray() {
     },
     {
       id: 5,
-      gym_id: 911,
+      gym_id: gyms[4].id,
       img_urls: [
         "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
         "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
@@ -179,23 +166,25 @@ function makeExpectedGym(users, gym, images) {
 }
 
 function makeMaliciousGym(user) {
-  console.log([user][0]);
-  const maliciousGym = makeMaliciousGymInstance(user);
+  const maliciousGym = {
+    id: 911,
+    user_id: user.id,
+    title: 'Naughty naughty very naughty <script>alert("xss");</script>',
+    description: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`,
+    price: 15,
+    max_guest: 2,
+    location: "los-angeles",
+    date_created: new Date(),
+  };
 
-  // const user = makeUsersArray()[2];
-
-  // const maliciousGym = {
-  //   id: 911,
-  //   user_id: user.id,
-  //   title: 'Naughty naughty very naughty <script>alert("xss");</script>',
-  //   description: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`,
-  //   price: 15,
-  //   max_guest: 2,
-  //   location: "los-angeles",
-  //   date_created: new Date(),
-  // };
-
-  const image = makeImagesArray()[4];
+  const image = {
+    id: 1,
+    gym_id: maliciousGym.id,
+    img_urls: [
+      "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
+      "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
+    ],
+  };
 
   const expectedGym = {
     ...makeExpectedGym([user], maliciousGym, [image]),
@@ -203,6 +192,7 @@ function makeMaliciousGym(user) {
       'Naughty naughty very naughty &lt;script&gt;alert("xss");&lt;/script&gt;',
     description: `Bad image <img src="https://url.to.file.which/does-not.exist">. But not <strong>all</strong> bad.`,
   };
+  console.log(maliciousGym);
   return {
     maliciousGym,
     expectedGym,
@@ -212,7 +202,7 @@ function makeMaliciousGym(user) {
 function makeGymsFixtures() {
   const testUsers = makeUsersArray();
   const testGyms = makeGymsArray(testUsers);
-  const testImages = makeImagesArray();
+  const testImages = makeImagesArray(testGyms);
 
   return { testUsers, testGyms, testImages };
 }
@@ -231,8 +221,10 @@ function cleanTables(db) {
         Promise.all([
           trx.raw(`ALTER SEQUENCE gymbnb_gyms_id_seq minvalue 0 START WITH 1`),
           trx.raw(`ALTER SEQUENCE gymbnb_users_id_seq minvalue 0 START WITH 1`),
+          trx.raw(`ALTER SEQUENCE gym_images_id_seq minvalue 0 START WITH 1`),
           trx.raw(`SELECT setval('gymbnb_gyms_id_seq', 0)`),
           trx.raw(`SELECT setval('gymbnb_users_id_seq', 0)`),
+          trx.raw(`SELECT setval('gym_images_id_seq', 0)`),
         ])
       )
   );
@@ -247,7 +239,6 @@ function seedUsers(db, users) {
     .into("gymbnb_users")
     .insert(preppedUsers)
     .then(() =>
-      // update the auto sequence to stay in sync
       db.raw(`SELECT setval('gymbnb_users_id_seq', ?)`, [
         users[users.length - 1].id,
       ])
@@ -255,22 +246,29 @@ function seedUsers(db, users) {
 }
 
 function seedGymsTables(db, users, gyms, images) {
-  // use a transaction to group the queries and auto rollback on any failure
   return db.transaction(async (trx) => {
     await seedUsers(trx, users);
     await trx.into("gymbnb_gyms").insert(gyms);
     await trx.into("gym_images").insert(images);
-    // update the auto sequence to match the forced id values
     await trx.raw(`SELECT setval('gymbnb_gyms_id_seq', ?)`, [
       gyms[gyms.length - 1].id,
     ]);
   });
 }
 
-function seedMaliciousGym(db, user, gym, img) {
+function seedMaliciousGym(db, user, gym) {
+  const badImage = {
+    id: 1,
+    gym_id: gym.id,
+    img_urls: [
+      "https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg",
+      "https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg",
+    ],
+  };
+
   return seedUsers(db, [user])
     .then(() => db.into("gymbnb_gyms").insert([gym]))
-    .then(() => db.into("gym_images").insert([img]));
+    .then(() => db.into("gym_images").insert(badImage));
 }
 
 function makeAuthHeader(user, secret = process.env.JWT_SECRET) {

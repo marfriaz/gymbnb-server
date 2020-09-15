@@ -21,49 +21,48 @@ describe("Gyms Endpoints", function () {
 
   afterEach("cleanup", () => helpers.cleanTables(db));
 
-  describe(`GET /api/gyms`, () => {
-    context(`Given no gyms`, () => {
-      it(`responds with 200 and an empty list`, () => {
-        return supertest(app).get("/api/gyms").expect(200, []);
+  `GET /api/gyms`,
+    () => {
+      context(`Given no gyms`, () => {
+        it(`responds with 200 and an empty list`, () => {
+          return supertest(app).get("/api/gyms").expect(200, []);
+        });
       });
-    });
 
-    context("Given there are gyms in the database", () => {
-      beforeEach("insert gyms", () =>
-        helpers.seedGymsTables(db, testUsers, testGyms, testImages)
-      );
-
-      it("responds with 200 and all of the gyms", () => {
-        const expectedGyms = testGyms.map((gym) =>
-          helpers.makeExpectedGym(testUsers, gym, testImages)
+      context("Given there are gyms in the database", () => {
+        beforeEach("insert gyms", () =>
+          helpers.seedGymsTables(db, testUsers, testGyms, testImages)
         );
-        return supertest(app).get("/api/gyms").expect(200, expectedGyms);
-      });
-    });
 
-    context(`Given an XSS attack gym`, () => {
-      const testUser = helpers.makeUsersArray()[1];
-      const testImage = helpers.makeImagesArray()[1];
-      const { maliciousGym, expectedGym } = helpers.makeMaliciousGym(
-        testUser,
-        testImage
-      );
-
-      beforeEach("insert malicious gym", () => {
-        return helpers.seedMaliciousGym(db, testUser, maliciousGym, testImage);
+        it("responds with 200 and all of the gyms", () => {
+          const expectedGyms = testGyms.map((gym) =>
+            helpers.makeExpectedGym(testUsers, gym, testImages)
+          );
+          return supertest(app).get("/api/gyms").expect(200, expectedGyms);
+        });
       });
 
-      it("removes XSS attack content", () => {
-        return supertest(app)
-          .get(`/api/gyms`)
-          .expect(200)
-          .expect((res) => {
-            expect(res.body[0].title).to.eql(expectedGym.title);
-            expect(res.body[0].description).to.eql(expectedGym.description);
-          });
+      context(`Given an XSS attack gym`, () => {
+        const testUser = helpers.makeUsersArray()[1];
+        const { maliciousGym, expectedGym } = helpers.makeMaliciousGym(
+          testUser
+        );
+
+        beforeEach("insert malicious gym", () => {
+          return helpers.seedMaliciousGym(db, testUser, maliciousGym);
+        });
+
+        it("removes XSS attack content", () => {
+          return supertest(app)
+            .get(`/api/gyms`)
+            .expect(200)
+            .expect((res) => {
+              expect(res.body[0].title).to.eql(expectedGym.title);
+              expect(res.body[0].description).to.eql(expectedGym.description);
+            });
+        });
       });
-    });
-  });
+    };
 
   describe(`GET /api/gyms/:gym_id`, () => {
     context(`Given no gyms`, () => {
@@ -100,11 +99,10 @@ describe("Gyms Endpoints", function () {
 
     context(`Given an XSS attack gym`, () => {
       const testUser = helpers.makeUsersArray()[1];
-      const testImage = helpers.makeImagesArray()[4];
       const { maliciousGym, expectedGym } = helpers.makeMaliciousGym(testUser);
 
       beforeEach("insert malicious gym", () => {
-        return helpers.seedMaliciousGym(db, testUser, maliciousGym, testImage);
+        return helpers.seedMaliciousGym(db, testUser, maliciousGym);
       });
 
       it("removes XSS attack content", () => {
