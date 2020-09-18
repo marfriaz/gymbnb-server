@@ -10,9 +10,9 @@ gymsRouter
   .route("/")
 
   .get((req, res, next) => {
+    console.log("demo");
     GymsService.getAllGyms(req.app.get("db"))
       .then((gyms) => {
-        // res.json(gyms);
         res.json(gyms.map(GymsService.serializeGym));
       })
       .catch(next);

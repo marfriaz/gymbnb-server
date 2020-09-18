@@ -18,7 +18,6 @@ app.use(cors());
 app.use(helmet());
 
 app.use("/api/gyms", gymsRouter);
-// should i  have app.use("/api/gym", gymsRouter)?????;
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
 
