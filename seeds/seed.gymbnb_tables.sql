@@ -47,6 +47,7 @@ VALUES
   (1, '{https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg, https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg}'),
   (2, '{https://live.staticflickr.com/65535/50328970222_1e754e98af_c.jpg, https://live.staticflickr.com/65535/50328970567_4785677e0b_b.jpg, https://live.staticflickr.com/65535/50328791471_e57dc53395_h.jpg}'),
   (3, '{https://i.pinimg.com/originals/6f/c3/e8/6fc3e8a189fa706150a9fc3780ac29ea.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_4.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafb8adea35.jpeg}'),
+    (9, '{https://live.staticflickr.com/65535/50354406226_14c032540a_k.jpg}'),
   (5, '{https://live.staticflickr.com/65535/50328810791_ec927d1725_k.jpg, https://live.staticflickr.com/65535/50328989632_ff27a23dd8_h.jpg}'),
   (6, '{https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/efe937780e95574250dabe07151bdc23_2.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/efe937780e95574250dabe07151bdc23_1.jpg}'),
   (7, '{https://i.pinimg.com/236x/f0/3e/10/f03e10aee84a171dc6ece6c1e29619d7.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_4.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafb8adea35.jpeg, 
