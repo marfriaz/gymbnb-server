@@ -10,7 +10,7 @@ TRUNCATE
 INSERT INTO gymbnb_users (id, first_name, last_name, email, password)
 VALUES
   (1, 'Marco', 'Friaz', 'marfriaz@gmail.com', '$2a$12$lHK6LVpc15/ZROZcKU00QeiD.RyYq5dVlV/9m4kKYbGibkRc5l4Ne'),
-  (2, 'Dwayne', 'Johnson', 'user', '$2a$12$lHK6LVpc15/ZROZcKU00QeiD.RyYq5dVlV/9m4kKYbGibkRc5l4Ne'),
+  (2, 'Dwayne', 'Johnson', 'user@gmail.com', '$2a$12$lHK6LVpc15/ZROZcKU00QeiD.RyYq5dVlV/9m4kKYbGibkRc5l4Ne'),
   (3, 'Chris', 'Rock', 'user@gmail.com', '$2a$12$lHK6LVpc15/ZROZcKU00QeiD.RyYq5dVlV/9m4kKYbGibkRc5l4Ne');
 
 
@@ -47,13 +47,13 @@ VALUES
   (1, '{https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg, https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg}'),
   (2, '{https://live.staticflickr.com/65535/50328970222_1e754e98af_c.jpg, https://live.staticflickr.com/65535/50328970567_4785677e0b_b.jpg, https://live.staticflickr.com/65535/50328791471_e57dc53395_h.jpg}'),
   (3, '{https://i.pinimg.com/originals/6f/c3/e8/6fc3e8a189fa706150a9fc3780ac29ea.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_4.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafb8adea35.jpeg}'),
-    (9, '{https://live.staticflickr.com/65535/50354406226_14c032540a_k.jpg}'),
+  (4, '{https://live.staticflickr.com/65535/50354406226_14c032540a_k.jpg}'),
   (5, '{https://live.staticflickr.com/65535/50328810791_ec927d1725_k.jpg, https://live.staticflickr.com/65535/50328989632_ff27a23dd8_h.jpg}'),
   (6, '{https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/efe937780e95574250dabe07151bdc23_2.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/efe937780e95574250dabe07151bdc23_1.jpg}'),
   (7, '{https://i.pinimg.com/236x/f0/3e/10/f03e10aee84a171dc6ece6c1e29619d7.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_4.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafb8adea35.jpeg, 
   https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafa0e52c5a.jpeg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_3.jpg}'),
   (8, '{https://live.staticflickr.com/65535/50328957172_22665abf5e_h.jpg, https://live.staticflickr.com/65535/50328956702_00db80da55_h.jpg}'),
-  (9, '{https://live.staticflickr.com/65535/50354406226_14c032540a_k.jpg}'),
+  (9, '{https://i.pinimg.com/564x/2c/a1/9b/2ca19bb6d590112e486cc123ab0eb14a.jpg, https://i.pinimg.com/564x/c0/55/00/c05500f251b530f49ecfb4b33597877c.jpg, https://i.pinimg.com/564x/8c/64/4b/8c644bf48b908b2ca46e7114382972cf.jpg}'),
   (10, '{https://live.staticflickr.com/65535/50353703448_56444fcacf_k.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/f9b902fc3289af4dd08de5d1de54f68f_4.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafb8adea35.jpeg}'),
   (11, '{https://p6r9a9v8.stackpathcdn.com/wp-content/uploads/2018/11/Budget-Home-Gym-Example.jpg, https://p6r9a9v8.stackpathcdn.com/wp-content/uploads/2018/11/Budget-Home-Gym-Example-2.jpg}'),
   (12, '{https://i.pinimg.com/originals/26/b1/fb/26b1fbfb2bff406f71bd213b314872a5.jpg, https://img.gs/kjrgscdmbm/700/https://www.garagegymreviews.com/articles/images/9778d5d219c5080b9a6a17bef029331c_5dbafb8adea35.jpeg, 
