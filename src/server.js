@@ -1,4 +1,5 @@
-require("dotenv").config();
+require("dotenv").config(); // NPM package dotenv: reads .env files and use it to add values to the process.env object
+//at the top of your server.js, require the dotenv module and invoke it's config() method to read the .env file.
 
 const knex = require("knex");
 const app = require("./app");
