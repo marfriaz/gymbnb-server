@@ -4,6 +4,7 @@ const UsersService = require("./users-service");
 
 const usersRouter = express.Router();
 const jsonBodyParser = express.json();
+// the express.json() middleware must be applied to parse the JSON data in the body of the request.
 
 usersRouter.post("/", jsonBodyParser, (req, res, next) => {
   const { password, email, first_name, last_name } = req.body;
