@@ -15,7 +15,7 @@ To try out this app, you can create a new account from the Sign Up page or use t
 - Email: user@gmail.com
 - Password: password
 
-## Technology
+## Technology (for API)
 
 #### Back End
 
