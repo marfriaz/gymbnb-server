@@ -53,18 +53,37 @@ During SF's covid stay at home mandate, my gym was shutdown without a forseeable
 
 #### Production
 
-Deployed via Heroku
+- Deployed via Heroku
 
 ## Set up
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+Major dependencies for this repo include Postgres and Node.
 
-1. Clone this repository to your local machine `git clone https://github.com/marfriaz/gymbnb-server.git NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+To get setup locally, do the following:
+
+1. Clone this repository to your machine, cd into the directory and run npm install
+2. Create the dev and test databases: createdb -U postgres -d gymbnb and createdb -U postgres -d gymbnb-test
+
+3. Create a `.env` and a `.env.test` file in the project root
+
+Inside these files you'll need the following:
+
+```
+NODE_ENV=development
+PORT=8000
+DATABASE_URL="postgresql://postgres@localhost/gymbnb"
+TEST_DATABASE_URL="postgresql://postgres@localhost/gymbnb-test"
+```
+
+4. Run the migrations for dev - `npm run migrate`
+5. Run the migrations for test - `npm run migrate:test`
+6. Seed the database for dev
+
+- `psql -U postgres -d gymbnb -f ./seeds/seed.gymbnb_tables.sql`
+- `psql -U postgres -d gymbnb-test -f ./seeds/seed.gymbnb_tables.sql`
+
+7. Run the tests - `npm t`
+8. Start the app - `npm run dev`
 
 ## Scripts
 
@@ -73,7 +92,3 @@ Start the application `npm start`
 Start nodemon for the application `npm run dev`
 
 Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
