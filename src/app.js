@@ -1,4 +1,11 @@
 const express = require("express");
+// Express (npm package) is the most widely used web framework for Node today.
+// Express "knows" how to read and interpret HTTP requests and also "knows"
+// how to respond to the client with HTTP responses.
+// express(): The top-level function exported by the Express module.
+// Calling this function creates an Express app and gives us access to the other Express objects below.
+// App, Req, Res, Router
+// When a request arrives at the server, Express will examine the HTTP method and the path and attempt to find a relevant route
 // To use Express you first need to require the package.
 // After installing it as a dependency in your project
 const morgan = require("morgan");
@@ -25,6 +32,7 @@ const authRouter = require("./auth/auth-router");
 const usersRouter = require("./users/users-router");
 
 const app = express();
+// The app.js file creates the express instance, app and exports it
 // express(): The top-level function exported by the Express module. Calling this function creates an
 // Express app and gives us access to the other Express objects below.
 
@@ -35,13 +43,21 @@ app.use(
 );
 // In order for middleware to be used by Express, it must be Mounted (or added) at some specified path.
 // The Express application object provides a method use() precisely for mounting middleware.
+// And add it to Express with the use() method
 
 app.use(cors());
+// Express middleware, cors, that simplifies the configuration of CORS in Express
+// And add it to Express with the use() method:
+
 app.use(helmet());
+// And add it to Express with the use() method:
 
 app.use("/api/gyms", gymsRouter);
+// And add it to Express with the use() method:
 app.use("/api/auth", authRouter);
+// And add it to Express with the use() method:
 app.use("/api/users", usersRouter);
+// And add it to Express with the use() method:
 
 app.use(function errorHandler(error, req, res, next) {
   let response;

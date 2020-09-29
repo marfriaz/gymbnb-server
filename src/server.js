@@ -4,6 +4,7 @@ require("dotenv").config();
 const knex = require("knex");
 // Knex (npm package) is a SQL query builder library that we can use with different types of databases with Node
 const app = require("./app");
+// express instance from app
 const { PORT, DATABASE_URL } = require("./config");
 
 const db = knex({
@@ -19,8 +20,8 @@ const db = knex({
 // When building a query, we can use the .then promise method to perform the query.
 
 app.set("db", db);
-// The server.js file attaches the Knex instance to the app as a property called 'db'
-
+// The server.js file attaches the Knex instance to the express app as a property called 'db'
+// Can't require server.js on app.js as that'd be a dependency cycle
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
 });
