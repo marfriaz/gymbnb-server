@@ -20,8 +20,9 @@ To try out this app, you can create a new account from the Sign Up page or use t
 #### Back End
 
 - Node and Express
+  - Express Router
   - Authentication via JWT
-  - RESTful Api
+  - RESTful API
 - Testing
   - Supertest (integration)
   - Mocha and Chai (unit)
@@ -35,11 +36,9 @@ To try out this app, you can create a new account from the Sign Up page or use t
 
 ## Features
 
-- Search gyms by location
-- "Email Host" malito link connected to host's email
-- "Host a Gym" form for listing home gyms onto the platform
-- "Sign Up" form
-- "Login" form
+- 3 database tables: gyms (listings), users and images
+- Authentication via JWT
+- XSS Middleware
 
 ## Motivation
 
