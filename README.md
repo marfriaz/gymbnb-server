@@ -50,13 +50,15 @@ During SF's covid stay at home mandate, my gym was shutdown without a forseeable
 
 ## Video Demos
 
-[![Watch the video](https://i.imgur.com/NvdEQju.png)](https://www.youtube.com/watch?v=TUgLHtagTTQ&feature=youtu.be&ab_channel=MarcoFriaz)
+#### Video Demos in mobile viewport but this App supports a responsive design
 
 - [Gymbnb (Youtube Vid Demo)](https://www.youtube.com/watch?v=TUgLHtagTTQ&feature=youtu.be&ab_channel=MarcoFriaz)
 
-[![Watch the video](https://i.imgur.com/NvdEQju.png)](https://www.youtube.com/watch?v=vccD64fxJ2M&feature=youtu.be&ab_channel=MarcoFriaz)
+[![Watch the video](https://i.imgur.com/NvdEQju.png)](https://www.youtube.com/watch?v=TUgLHtagTTQ&feature=youtu.be&ab_channel=MarcoFriaz)
 
-- [Gymbnb Login (Youtube Vid Demo)](https://www.youtube.com/watch?v=vccD64fxJ2M&feature=youtu.be&ab_channel=MarcoFriaz)
+- [Gymbnb Login (Youtube Vid Demo)](https://www.youtube.com/watch?v=vccD64fxJ2M&feature=youtu.be&ab_channel=MarcoFriaz)]
+
+  [![Watch the video](https://i.imgur.com/NvdEQju.png)](https://www.youtube.com/watch?v=vccD64fxJ2M&feature=youtu.be&ab_channel=MarcoFriaz)
 
 ## Getting Started
 
