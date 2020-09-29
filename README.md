@@ -47,6 +47,9 @@ During SF's covid stay at home mandate, my gym was shutdown without a forseeable
 
 ## Video Demos
 
+Entity Relationship Diagram (ERD)
+![ERD](https://i.imgur.com/ykVwYUw.png)
+
 [![Watch the video](https://i.imgur.com/NvdEQju.png)](https://www.youtube.com/watch?v=TUgLHtagTTQ&feature=youtu.be&ab_channel=MarcoFriaz)
 
 - [Gymbnb (Youtube Vid Demo)](https://www.youtube.com/watch?v=TUgLHtagTTQ&feature=youtu.be&ab_channel=MarcoFriaz)
