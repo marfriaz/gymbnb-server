@@ -15,6 +15,24 @@ To try out this app, you can create a new account from the Sign Up page or use t
 - Email: user@gmail.com
 - Password: password
 
+## Technology
+
+#### Back End
+
+- Node and Express
+  - Authentication via JWT
+  - RESTful Api
+- Testing
+  - Supertest (integration)
+  - Mocha and Chai (unit)
+- Database
+  - Postgres
+  - Knex.js - SQL wrapper
+
+#### Production
+
+- Deployed via Heroku
+
 ## Features
 
 - Search gyms by location
@@ -37,25 +55,7 @@ During SF's covid stay at home mandate, my gym was shutdown without a forseeable
 
 - [Gymbnb Login (Youtube Vid Demo)](https://www.youtube.com/watch?v=vccD64fxJ2M&feature=youtu.be&ab_channel=MarcoFriaz)
 
-## Technology
-
-#### Back End
-
-- Node and Express
-  - Authentication via JWT
-  - RESTful Api
-- Testing
-  - Supertest (integration)
-  - Mocha and Chai (unit)
-- Database
-  - Postgres
-  - Knex.js - SQL wrapper
-
-#### Production
-
-- Deployed via Heroku
-
-## Set up
+## Getting Started
 
 Major dependencies for this repo include Postgres and Node.
 
@@ -84,11 +84,3 @@ TEST_DATABASE_URL="postgresql://postgres@localhost/gymbnb-test"
 
 7. Run the tests - `npm t`
 8. Start the app - `npm run dev`
-
-## Scripts
-
-Start the application `npm start`
-
-Start nodemon for the application `npm run dev`
-
-Run the tests `npm test`
