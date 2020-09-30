@@ -37,7 +37,6 @@ const GymsService = {
       .leftJoin("gym_images AS img", "gym.id", "img.gym_id")
       .leftJoin("gymbnb_users AS usr", "gym.user_id", "usr.id")
       .groupBy("gym.id", "usr.id", "img.id");
-    // .groupBy("gym.id", "usr.id")
   },
 
   getById(db, id) {
@@ -47,15 +46,6 @@ const GymsService = {
   getByLocation(db, location) {
     return GymsService.getAllGyms(db).where("gym.location", location);
   },
-
-  // insertGym(db, newGym) {
-  //   return db
-  //     .insert(newGym)
-  //     .into("gymbnb_gyms")
-  //     .returning("*")
-  //     .then(([gym]) => gym)
-  //     .then((gym) => GymsService.getById(db, gym.id));
-  // },
 
   insertGym(db, newGym, img_urls) {
     return db
@@ -67,15 +57,12 @@ const GymsService = {
   },
 
   insertImages(db, gym_id, img_urls) {
-    return (
-      db
-        .raw(
-          `INSERT INTO gym_images(gym_id, img_urls) VALUES(${gym_id}, '${img_urls}')`
-        )
-        // what you pass to the .then is a callback function,
-        // .raw doesnt return anything specifically,
-        .then(() => GymsService.getById(db, gym_id))
-    );
+    return db
+      .raw(
+        `INSERT INTO gym_images(gym_id, img_urls) VALUES(${gym_id}, '${img_urls}')`
+      )
+
+      .then(() => GymsService.getById(db, gym_id));
   },
 
   getById(db, id) {
