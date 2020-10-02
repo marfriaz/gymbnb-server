@@ -24,7 +24,7 @@ app.use("/api/users", usersRouter);
 app.use(function errorHandler(error, req, res, next) {
   let response;
   if (NODE_ENV === "production") {
-    response = { error: "Server error" };
+    response = { error: error.message };
   } else {
     console.error(error);
     response = { error: error.message, object: error };
