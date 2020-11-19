@@ -23,12 +23,14 @@ To try out this app, you can create a new account from the Sign Up page or use t
   - Express Router
   - Authentication via JWT
   - RESTful API
-- Testing
-  - Supertest (integration)
-  - Mocha and Chai (unit)
+- Integration Testing
+  - Supertest
+  - Mocha
+  - Chai
 - Database
-  - Postgres
-  - Knex.js - SQL wrapper
+  - PostgreSQL
+  - Knex.js
+  - SQL
 
 #### Production
 
